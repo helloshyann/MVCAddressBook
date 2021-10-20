@@ -21,7 +21,7 @@ namespace MVCAddressBook.Models
         public string LastName { get; set; }
 
         [NotMapped]
-        public string FullName { get { return $"{FirstName} + {LastName}"; } }
+        public string FullName { get { return $"{FirstName} {LastName}"; } }
 
         // Navigational property (shows how every contact is connected to one and only one user)
         public virtual AppUser User { get; set; }

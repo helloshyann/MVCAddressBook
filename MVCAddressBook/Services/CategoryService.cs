@@ -20,13 +20,17 @@ namespace MVCAddressBook.Services
 
         public async Task AddContactToCategoryAsync(int categoryId, int contactId)
         {
-            var contact = await _context.Contacts.FindAsync(contactId);
-            var category = await _context.Categories.FindAsync(contactId);
-            category.Contacts.Add(contact);
+            if (!await IsContactInCategory(categoryId, contactId))
+            {
 
-            //Alternate:
-            // contact.Categories.Add(category);
-            await _context.SaveChangesAsync();
+                var contact = await _context.Contacts.FindAsync(contactId);
+                var category = await _context.Categories.FindAsync(categoryId);
+                category.Contacts.Remove(contact);
+
+                //Alternate:
+                // contact.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task<ICollection<Category>> GetContactCategoriesAsync(int contactId)
@@ -43,15 +47,26 @@ namespace MVCAddressBook.Services
             return category.Contacts.Count;
         }
 
-        public async Task RemoveContactToCategoryAsync(int categoryId, int contactId)
+        public async Task<bool> IsContactInCategory(int categoryId, int contactId)
         {
             var contact = await _context.Contacts.FindAsync(contactId);
-            var category = await _context.Categories.FindAsync(contactId);
+            return await _context.Categories.Include(c => c.Contacts)
+                .Where(c => c.Id == categoryId && c.Contacts.Contains(contact)).AnyAsync();
+        }
+
+        public async Task RemoveContactToCategoryAsync(int categoryId, int contactId)
+        {
+            if(await IsContactInCategory(categoryId, contactId))
+            {
+
+            var contact = await _context.Contacts.FindAsync(contactId);
+            var category = await _context.Categories.FindAsync(categoryId);
             category.Contacts.Remove(contact);
 
             //Alternate:
             // contact.Categories.Remove(category);
             await _context.SaveChangesAsync();
+            }
         }
     }
 }

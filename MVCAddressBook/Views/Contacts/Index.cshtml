@@ -1,4 +1,7 @@
-﻿@model IEnumerable<MVCAddressBook.Models.Contact>
+﻿@using MVCAddressBook.Services.Interfaces
+@inject IImageService imageService
+
+@model MVCAddressBook.Models.ViewModels.ContactIndexViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -9,56 +12,69 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+
+<div class="row row-cols-1 row-cols-md-2">
+    <div class="col">
+        <form method="post" asp-controller="Contacts" asp-action="SearchContacts">
+            <input type="text" name="searchString" class="form-control" placeholder="Search..." />
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="col">
+        <form method="post" asp-controller="Contacts" asp-action="FilterContacts">
+            <select name="categoryId" class="form-select" asp-items="Model.CategoryFilter">
+                <option>Choose a category</option>
+            </select>
+            <button class="btn btn-outline-secondary" type="submit">Filter</button>
+        </form>
+    </div>
+</div>
+
+<table class="table" method="post" enctype="multipart/form-data">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                First Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                Last Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Birthday)
+                Birthday
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address1)
+                Address (Line 1)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address2)
+                Address (Line 2)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
+                City
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.State)
+                State
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ZipCode)
+                Zip
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                Email
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone)
+                Phone
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Created)
+                Created on
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageFile)
+                Image
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.ImageType)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Contacts) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
@@ -94,14 +110,16 @@
                 @Html.DisplayFor(modelItem => item.Created)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageFile)
+                @if (item.ImageData is not null)
+                {
+                    <img src="@imageService.DecodeImage(item.ImageData, item.ImageType)" alt="Contact Photo" class="img-fluid" />
+                }
+                else
+                {
+                    <img src="~/img/contact-placeholder.png" />
+                }
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.ImageType)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.User.FullName)
-            </td>
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
