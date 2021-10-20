@@ -25,7 +25,7 @@ namespace MVCAddressBook.Services
 
                 var contact = await _context.Contacts.FindAsync(contactId);
                 var category = await _context.Categories.FindAsync(categoryId);
-                category.Contacts.Remove(contact);
+                category.Contacts.Add(contact);
 
                 //Alternate:
                 // contact.Categories.Remove(category);
