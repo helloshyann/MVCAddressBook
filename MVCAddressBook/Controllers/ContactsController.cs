@@ -58,12 +58,18 @@ namespace MVCAddressBook.Controllers
             var contact = await _context.Contacts
                 .Include(c => c.Categories)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (contact == null)
             {
                 return NotFound();
             }
 
-            return View(contact);
+            var userId = _userManager.GetUserId(User);
+            var model = new ContactCreateViewModel();
+            model.Contact = contact;
+            model.CategoryList = new SelectList(_context.Categories.Where(c => c.UserId == userId), "Id", "Name");
+
+            return View(model);
         }
 
         // GET: Contacts/Create
