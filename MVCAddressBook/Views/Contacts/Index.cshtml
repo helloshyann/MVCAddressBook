@@ -7,125 +7,74 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container glass-style lightGlass mt-2 m-2 p-2">
+    <div class="row row-cols-1 row-cols-md-4">
+        <div class="col-12 col-md-4">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+            <form method="post" class="flex" asp-controller="Contacts" asp-action="SearchContacts">
+                <input type="text" name="searchString" class="form-control" placeholder="Search..." />
+                <button class="btn btn-dark" type="submit">Search</button>
+            </form>
 
-<div class="row row-cols-1 row-cols-md-2">
-    <div class="col">
-        <form method="post" asp-controller="Contacts" asp-action="SearchContacts">
-            <input type="text" name="searchString" class="form-control" placeholder="Search..." />
-            <button class="btn btn-outline-secondary" type="submit">Search</button>
-        </form>
-    </div>
-    <div class="col">
-        <form method="post" asp-controller="Contacts" asp-action="FilterContacts">
-            <select name="categoryId" class="form-select" asp-items="Model.CategoryFilter">
-                <option>Choose a category</option>
-            </select>
-            <button class="btn btn-outline-secondary" type="submit">Filter</button>
-        </form>
+        </div>
+        <div class="col-12 col-md-4">
+            <form method="post" class="flex" asp-controller="Contacts" asp-action="FilterContacts">
+                <select name="categoryId" class="form-select" asp-items="Model.CategoryFilter">
+                    <option>Choose a category</option>
+                </select>
+                <button class="btn btn-dark" type="submit">Filter</button>
+            </form>
+        </div>
+        <div class="col-12 col-md-2 d-flex justify-content-end">
+            <a asp-action="Index" class="btn btn-dark">Reset Filters</a>
+        </div>
+        <div class="col-12 col-md-2 d-flex justify-content-end">
+            <a asp-action="Create" class="btn btn-success">Create A New Contact</a>
+        </div>
     </div>
 </div>
 
-<table class="table" method="post" enctype="multipart/form-data">
-    <thead>
-        <tr>
-            <th>
-                First Name
-            </th>
-            <th>
-                Last Name
-            </th>
-            <th>
-                Birthday
-            </th>
-            <th>
-                Address (Line 1)
-            </th>
-            <th>
-                Address (Line 2)
-            </th>
-            <th>
-                City
-            </th>
-            <th>
-                State
-            </th>
-            <th>
-                Zip
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Phone
-            </th>
-            <th>
-                Created on
-            </th>
-            <th>
-                Image
-            </th>
+
+
+
+
+<div class="row">
+
+    @foreach (var item in Model.Contacts)
+    {
+    <div class="col-12 col-md-3 d-flex align-items-stretch">
+        <div class="card glass-style lightGlass m-2" style="width: 18rem;">
             
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Contacts) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Birthday)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZipCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
+            <div class="container p-2">
+
                 @if (item.ImageData is not null)
                 {
-                    <img src="@imageService.DecodeImage(item.ImageData, item.ImageType)" alt="Contact Photo" class="img-fluid" />
+                    <img src="@imageService.DecodeImage(item.ImageData, item.ImageType)" alt="Contact Photo" class="img-fluid card-img" />
                 }
                 else
                 {
-                    <img src="~/img/contact-placeholder.png" />
+                    <img src="~/img/contact-placeholder.png" class="img-fluid card-img" />
                 }
-            </td>
-            
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+            </div>
+
+            <div class="container p-2">
+                <h4><b>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</b></h4>
+                <p>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                    <br />@Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.State)
+                </p>
+                <p>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-dark">View All Details</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    }
+
+        
+</div>
+
+
+
+    

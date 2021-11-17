@@ -1,0 +1,106 @@
+﻿@font-face {
+    font-family: "lemonmilk";
+    src: url('/fonts/LEMONMILK-Light.ttf');
+}
+
+@font-face {
+    font-family: 'LouisGeorge';
+    src: url('/fonts/LouisGeorge.ttf') format('truetype');
+}
+
+:root{
+    --formfocusColor: var(--gs-secondaryColor);
+    --formfocusShadow: rgb(255, 255, 255);
+    --dark-gs-color: rgb(19,19,19);
+    --light-gs-color: #ffffff;
+    --gs-secondaryColor: #70aeff;
+    --gs-primaryColor: #91CBFB;
+}
+
+body {
+    color: var(--dark-gs-color);
+    font-family: 'LouisGeorge', sans-serif;
+    background: url("../img/wallpaper.jpg");
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.hf-style {
+    background-color: #6c6fe5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'LemonMilk', sans-serif;
+}
+
+.glass-style {
+    /*text color in form*/
+    color: var(--light-gs-color);
+    /*5px - 25px for blur*/
+    backdrop-filter: blur(15px);
+    /*tint color of background*/
+    background-color: rgba(153,223,255,.17);
+    /*!!! DO NOT CHANGE THESE VALUES !!!*/
+    border-radius: 10px;
+    box-shadow: rgba(0,0,0,.3) 2px 8px 8px;
+    border: 2px rgba(255,255,255,.4) solid;
+    border-bottom: 2px rgba(40,40,40,.35) solid;
+    border-right: 2px rgba(40,40,40,.35) solid;
+}
+
+.glass-style.darkGlass{
+    color: var(--light-gs-color);
+}
+
+.glass-style.lightGlass {
+    color: var(--dark-gs-color);
+}
+
+/*Tilt?*/
+.flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-primary {
+    background-color: #6c6fe5;
+    border-color: #6c6fe5;
+}
+
+    .btn-primary:hover {
+        background-color: #6c6fe5;
+        border-color: #6c6fe5;
+    }
+
+.btn-dark {
+    background-color: #343434;
+    border-color: #343434;
+}
+
+    .btn-dark:hover {
+        background-color: #343434;
+        border-color: #343434;
+    }
+
+.dropdown-menu-primary {
+    color: #ffffff;
+    background-color: #6c6fe5;
+    border-color: #6c6fe5;
+}
+
+
+    .dropdown-menu-primary > li > a:hover, .dropdown-menu > li > a:focus {
+        color: #808080;
+        background-color: #bfc1fe;
+    }
+
+footer .social > a {
+    color: var(--white-color);
+}
+
+    footer .social > a:hover {
+        opacity: .9;
+        color: #bfc1fe;
+    }

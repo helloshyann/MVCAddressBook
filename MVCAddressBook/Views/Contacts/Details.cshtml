@@ -1,106 +1,114 @@
 ﻿@using MVCAddressBook.Services.Interfaces
-@inject IImageService imageService
+@using MVCAddressBook.Enums
+@model MVCAddressBook.Models.ViewModels.ContactCreateViewModel
+@inject IImageService ImageService
+@{ ViewData["Title"] = "Details"; }
 
-@model MVCAddressBook.Models.Contact
 
-@{
-    ViewData["Title"] = "Details";
-}
+<div class="container mt-1">
+    
 
-<h1>Details</h1>
+    <div class="glass-style lightGlass p-4 mt-5">
+        <div class="row">
+            <h1>@Model.Contact.FullName</h1>
+            <hr />
 
-<div>
-    <h4>Contact</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Birthday)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Birthday)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Address1)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Address1)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Address2)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Address2)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.State)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ZipCode)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Created)
-        </dd>
-        <dt class="col-sm-2">
-            Image
-        </dt>
-        <dd class="col-sm-10">
-            @if (Model.ImageData is not null)
-            {
-                <img src="@imageService.DecodeImage(Model.ImageData, Model.ImageType)" alt="Contact Photo" class="img-fluid" />
-            }
-            else
-            {
-                <img src="~/img/contact-placeholder.png" />
-            }
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(modelItem => Model.User.FullName)
-        </dd>
-    </dl>
+            <div class="col-12 col-md-4 ">
+                @if (Model.Contact.ImageData is not null)
+                {
+                    <img src="@ImageService.DecodeImage(Model.Contact.ImageData, Model.Contact.ImageType)" alt="Contact Photo" class="img-fluid" />
+                }
+                else
+                {
+                    <img src="~/img/contact-placeholder.png" class="img-fluid" />
+                }
+            </div>
+            <div class="col-12 col-md-8">
+                <div class="row gy-2">
+                    <div class="col-12 col-md-6">
+                        <label asp-for="Contact.FirstName" class="control-label"></label>
+                        <input asp-for="Contact.FirstName" class="form-control" name="FirstName" readonly />
+
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label asp-for="Contact.LastName" class="control-label"></label>
+                        <input asp-for="Contact.LastName" class="form-control" name="LastName" readonly />
+
+                    </div>
+                    <div class="col-12 ">
+                        <label asp-for="Contact.Address1" class="control-label"></label>
+                        <input asp-for="Contact.Address1" class="form-control" name="Address1" readonly />
+
+                    </div>
+                    <div class="col-12 ">
+                        <label asp-for="Contact.Address2" class="control-label"></label>
+                        <input asp-for="Contact.Address2" class="form-control" name="Address2" readonly />
+
+                    </div>
+                    <div class="col-12 col-md-6 ">
+                        <label asp-for="Contact.City" class="control-label"></label>
+                        <input asp-for="Contact.City" class="form-control" name="City" readonly />
+
+                    </div>
+                    <div class="col-12 col-md-4 ">
+                        <label asp-for="Contact.State" class="control-label"></label>
+                        <select asp-for="Contact.State" name="State" asp-items="Html.GetEnumSelectList(typeof(States))" class="form-control" readonly></select>
+
+                    </div>
+                    <div class="col-12 col-md-2 ">
+                        <label asp-for="Contact.ZipCode" class="control-label"></label>
+                        <input asp-for="Contact.ZipCode" name="ZipCode" class="form-control" readonly />
+
+                    </div>
+                    <div class="col-12 col-md-6 ">
+                        <label asp-for="Contact.Email" class="control-label"></label>
+                        <input asp-for="Contact.Email" name="Email" class="form-control" readonly />
+
+                    </div>
+                    <div class="col-12 col-md-6 ">
+                        <label asp-for="Contact.Phone" class="control-label"></label>
+                        <input asp-for="Contact.Phone" name="Phone" class="form-control" readonly />
+
+                    </div>
+                    <div class="col-12 col-md-6 ">
+                        <label asp-for="Contact.Birthday" class="control-label"></label>
+                        <input asp-for="Contact.Birthday" class="form-control" name="Birthday" readonly />
+
+                    </div>
+
+                    <div class="col-12">
+
+                        @foreach (var category in Model.CategoryList)
+                        {
+                            if (Model.Contact.Categories.Select(c => c.Id).ToList().Contains(Convert.ToInt32(category.Value)))
+                            {
+                                <div class="form-check form-check-inline form-switch">
+                                    <input type="checkbox" checked class="form-check-input" name="CategoryList" value="@category.Value" onclick="return false" />
+                                    <label class="form-check-label" for="CategoryList">@category.Text</label>
+                                </div> }
+                            else
+                            {
+                                <div class="form-check form-check-inline form-switch">
+                                    <input type="checkbox" class="form-check-input" name="CategoryList" value="@category.Value" onclick="return false" />
+                                    <label class="form-check-label" for="CategoryList">@category.Text</label>
+                                </div>}
+
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12 d-flex justify-content-end">
+            <div class="m-1">
+                <a asp-action="Index" class="btn btn-dark">Back</a>
+            </div>
+            <div class="m-1">
+                <a asp-action="Edit" asp-route-id="@Model.Contact.Id" class="btn btn-warning">Edit</a>
+            </div>
+        </div>
+    </div>
+
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
