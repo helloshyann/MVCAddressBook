@@ -18,6 +18,7 @@ namespace MVCAddressBook.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
 
+
         public CategoriesController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
