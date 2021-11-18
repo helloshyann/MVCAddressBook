@@ -5,12 +5,11 @@
 @{ ViewData["Title"] = "Details"; }
 
 
-<div class="container mt-1">
+<div class="container glass-style lightGlass mt-2 m-2 p-4">
     
 
-    <div class="glass-style lightGlass p-4 mt-5">
         <div class="row">
-            <h1>@Model.Contact.FullName</h1>
+            <h1 class="animate__animated animate__fadeIn">@Model.Contact.FullName</h1>
             <hr />
 
             <div class="col-12 col-md-4 ">
@@ -108,7 +107,7 @@
                 <a asp-action="Edit" asp-route-id="@Model.Contact.Id" class="btn btn-warning">Edit</a>
             </div>
         </div>
-    </div>
+
 
 </div>
 
