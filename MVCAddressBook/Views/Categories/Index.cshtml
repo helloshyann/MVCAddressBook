@@ -4,45 +4,57 @@
     ViewData["Title"] = "Index";
 }
 
+<div class="container glass-style lightGlass mt-2 m-2 p-4">
+    <div class="row">
+        <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-start">
 
+            <h3>Your Categories</h3>
 
-<div class="container mt-1">
-    <div class="glass-style lightGlass p-4 mt-5">
-        <div class="row">
-            <h1>Your Categories</h1>
-            <hr />
-            <p>
-                <a asp-action="Create" class="btn btn-success">Create New</a>
-            </p>
-            <div class="col">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Name)
-                            </th>                            
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                
-                                <td>
-                                    
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-end">
+
+            <a asp-action="Create" class="btn btn-success">
+                Create New <i class="fas fa-plus-square text-light"></i>
+            </a>
+
         </div>
     </div>
+</div>
+
+<div class="container mt-1">
+
+        <div class="row">
+                    
+                        @foreach (var item in Model)
+                        {
+                <div class="col-12 col-md-4 col-lg-3 col-xl-2 d-flex justify-content-center">
+                    <div class="card glass-style lightGlass p-4 mt-2">
+
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col">
+                                    <h4>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </h4>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" >
+                                <i class="fas fa-trash-alt text-light"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </div> 
+                        }
+                 
+            
+
+        </div>
 </div>
 
 

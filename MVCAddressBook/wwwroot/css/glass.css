@@ -28,7 +28,7 @@ body {
 }
 
 .hf-style {
-    background-color: #6c6fe5;
+    background-color: #2b2d2f;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -86,14 +86,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .dropdown-menu-primary {
     color: #ffffff;
-    background-color: #6c6fe5;
-    border-color: #6c6fe5;
+    background-color: #2b2d2f;
+    border-color: #2b2d2f;
 }
 
 
     .dropdown-menu-primary > li > a:hover, .dropdown-menu > li > a:focus {
-        color: #808080;
-        background-color: #bfc1fe;
+
+        background-color: rgba(153,223,255,.17);
     }
 
 footer .social > a {
