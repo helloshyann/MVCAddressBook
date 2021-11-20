@@ -40,10 +40,10 @@ namespace MVCAddressBook.Services
         {
             var defaultUser = new AppUser
             {
-                UserName = "tonystark@mailinator.com",
-                Email = "tonystark@mailinator.com",
-                FirstName = "Tony",
-                LastName = "Stark",
+                UserName = "janedoe@mailinator.com",
+                Email = "janedoe@mailinator.com",
+                FirstName = "Jane",
+                LastName = "Doe",
                 EmailConfirmed = true,
             };
             try
@@ -64,22 +64,22 @@ namespace MVCAddressBook.Services
         }
         private async static Task SeedDefaultContacts(ApplicationDbContext dbContextSvc)
         {
-            var userId = dbContextSvc.Users.FirstOrDefault(u => u.Email == "tonystark@mailinator.com").Id;
+            var userId = dbContextSvc.Users.FirstOrDefault(u => u.Email == "janedoe@mailinator.com").Id;
             var defaultContact = new Contact
             {
                 UserId = userId,
                 Created = DateTime.Now,
-                FirstName = "Henry",
-                LastName = "McCoy",
+                FirstName = "John",
+                LastName = "Doe",
                 Address1 = "1407 Graymalkin Ln.",
                 City = "Salem Center",
                 Phone = "555-111-3232",
                 State = Enums.States.NY,
-                Email = "hankmccoy@mailinator.com"
+                Email = "johndoe@mailinator.com"
             };
             try
             {
-                var contact = await dbContextSvc.Contacts.AnyAsync(c => c.Email == "hankmccoy@mailinator.com" && c.UserId == userId);
+                var contact = await dbContextSvc.Contacts.AnyAsync(c => c.Email == "johndoe@mailinator.com" && c.UserId == userId);
                 if (!contact)
                 {
                     await dbContextSvc.AddAsync(defaultContact);
@@ -96,15 +96,15 @@ namespace MVCAddressBook.Services
         }
         private async static Task SeedDefaultCategoriesAsync(ApplicationDbContext dbContextSvc)
         {
-            var userId = dbContextSvc.Users.FirstOrDefault(u => u.Email == "tonystark@mailinator.com").Id;
+            var userId = dbContextSvc.Users.FirstOrDefault(u => u.Email == "janedoe@mailinator.com").Id;
             var defaultCategory = new Category
             {
                 UserId = userId,
-                Name = "X-Men"
+                Name = "Family"
             };
             try
             {
-                var category = await dbContextSvc.Categories.AnyAsync(c => c.Name == "X-Men" && c.UserId == userId);
+                var category = await dbContextSvc.Categories.AnyAsync(c => c.Name == "Family" && c.UserId == userId);
                 if (!category)
                 {
                     await dbContextSvc.AddAsync(defaultCategory);
@@ -124,7 +124,7 @@ namespace MVCAddressBook.Services
             var user = dbContextSvc.Users
                 .Include(c => c.Categories)
                 .Include(c => c.Contacts)
-                .FirstOrDefault(u => u.Email == "tonystark@mailinator.com");
+                .FirstOrDefault(u => u.Email == "janedoe@mailinator.com");
 
             foreach (var contact in user.Contacts)
             {
