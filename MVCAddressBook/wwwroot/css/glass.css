@@ -104,3 +104,7 @@ footer .social > a {
         opacity: .9;
         color: #bfc1fe;
     }
+
+.landing-icon {
+    max-width: 75px;
+}
