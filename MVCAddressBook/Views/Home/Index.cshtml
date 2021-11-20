@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container glass-style lightGlass animate__animated animate__pulse mt-2 m-2 p-2">
+<div class="container glass-style lightGlass animate__animated animate__pulse mt-2 m-2 mb-4 p-2">
     <div class="row p-4">
         <div class="col-12 col-md-4">
             <img src="/img/rolodex.png" class="img-fluid" />
@@ -13,8 +13,63 @@
             <h1 class="animate__animated animate__fadeIn">Welcome to the Rolodex</h1>
             <hr />
             <p>
-                This address book application was written utilizing the ASP.NET MVC design pattern.
+                <h3>Features</h3>
+                <ul class="fa-ul checklist">
+                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span>Authenticated User Accounts</li>
+                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span>Dynamic UI/UX</li>
+                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span>Email Service to Group Message Contacts by Category</li>
+                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span>Operational Database</li>
+                    <li><span class="fa-li"><i class="fas fa-check-square"></i></span>Object-Oriented Programming Implementation</li>
+                </ul>
             </p>
+
+            <div class="row mt-2 gx-5 row-cols-1 row-cols-md-2">
+                <div class="col mb-5 h-100">
+                    <div class="mb-3">
+                        <img src="~/img/html5icon.png" class="landing-icon"/>
+                        <img src="~/img/css3icon.png"  class="landing-icon" />
+                        <img src="~/img/bootstrapicon.png" class="landing-icon" />
+                    </div>
+                    <h2 class="h5">Front End</h2>
+                    <p class="mb-0">
+                        Designed leveraging HTML 5, CSS 3, and Bootstrap 5 to create a decorated and structured layout that has been directed at responsive, mobile-first web development.
+                    </p>
+                </div>
+                <div class="col mb-5 h-100">
+                    <div class="mb-3">
+                        <img src="~/img/csharpicon.png" class="landing-icon" />
+                        <img src="~/img/dotnet.png" class="landing-icon" />
+                    </div>
+                    <h2 class="h5">Back End</h2>
+                    <p class="mb-0">
+                        Written in Microsoft's C#, utilizing an MVC design pattern, and built by applying an ASP.NET Entity Core development framework.
+                    </p>
+                </div>
+                <div class="col mb-5 mb-md-0 h-100">
+                    <div class="mb-3">
+                        <img src="~/img/sqlicon.png" class="landing-icon" />
+                    </div>
+                    <h2 class="h5">Database</h2>
+                    <p class="mb-0">
+                        Implemented with a PostgreSQL database managed by pgAdmin.
+                    </p>
+                </div>
+                <div class="col h-100">
+                    <div class="mb-3">
+                        <img src="~/img/herokuicon.png" class="landing-icon" />
+                    </div>
+                    <h2 class="h5">Hosting</h2>
+                    <p class="mb-0">
+                        Hosted on a live Heroku web server.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-end">
+                    <a href="https://github.com/helloshyann/MVCAddressBook" target="_blank" class="badge btn-dark">View Repository on GitHub</a>
+                </div>
+            </div>
 
         </div>
     </div>
